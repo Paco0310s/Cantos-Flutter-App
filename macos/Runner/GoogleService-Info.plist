@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyATuYX029M4AOonT3Czx8FBYou6wDHcjAY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>792319468494</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.pacosotelo.cantosf.RunnerTests</string>
+	<key>PROJECT_ID</key>
+	<string>cantos-1651f</string>
+	<key>STORAGE_BUCKET</key>
+	<string>cantos-1651f.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:792319468494:ios:a25d4fb7ad5d391be1019f</string>
+</dict>
+</plist>
