@@ -20,6 +20,7 @@ class RegisterView extends StatelessWidget {
               ),
             ),
             SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
               child: Column(
                 children: [
                   const Gap(20),

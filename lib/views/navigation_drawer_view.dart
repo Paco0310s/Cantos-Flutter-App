@@ -14,6 +14,7 @@ class NavigationDrawerView extends StatelessWidget {
 
     return Scaffold(
       appBar: selectedNavigationModel.appBar,
+      floatingActionButton: selectedNavigationModel.floatingActionButton,
       drawer: Drawer(
         child: Column(
           children: [
@@ -37,6 +38,7 @@ class NavigationDrawerView extends StatelessWidget {
             ListView.builder(
               shrinkWrap: true,
               itemCount: navigationDrawerProvider.listViews.length,
+              physics: const BouncingScrollPhysics(),
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
                   leading: navigationDrawerProvider.listViews[index].icon,

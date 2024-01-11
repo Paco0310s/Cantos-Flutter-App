@@ -1,5 +1,7 @@
+import 'package:cantos_flutter/utils/constans.dart';
 import 'package:cantos_flutter/views/new_song_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:get/get.dart';
 
 class ViewSongView extends StatelessWidget {
@@ -8,6 +10,27 @@ class ViewSongView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            FloatingActionButton(
+              heroTag: 'left',
+              onPressed: () {},
+              backgroundColor: Constants.colorPrimaryLight,
+              child: const Icon(FeatherIcons.arrowLeft),
+            ),
+            FloatingActionButton(
+              heroTag: 'right',
+              onPressed: () {},
+              backgroundColor: Constants.colorPrimaryLight,
+              child: const Icon(FeatherIcons.arrowRight),
+            ),
+          ],
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       appBar: AppBar(
         title: const Text('Nombre del canto'),
         actions: [

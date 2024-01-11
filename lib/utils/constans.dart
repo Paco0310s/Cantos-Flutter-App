@@ -33,7 +33,8 @@ class Constants {
   static const Color colorPrimary = Color(0xFF393939);
   static const Color colorPrimaryDark = Color.fromARGB(255, 28, 28, 29);
   static const Color colorPrimaryDark2 = Color(0xFF303030);
-  static const Color colorPrimaryLight = Color(0xFFE0E0E0);
+  static const Color colorPrimaryLight = Color.fromARGB(255, 128, 125, 125);
+  static const Color colorPrimaryLight2 = Color(0xFFE0E0E0);
   static const Color colorDivider = Colors.grey;
   static const Color colorAccent = Colors.pinkAccent;
   static const Color colorTextPrimary = Color.fromARGB(255, 255, 255, 255);

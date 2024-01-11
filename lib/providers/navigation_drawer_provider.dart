@@ -1,5 +1,8 @@
 import 'package:cantos_flutter/functions/data_search.dart';
 import 'package:cantos_flutter/models/navigation_view_model.dart';
+import 'package:cantos_flutter/utils/constans.dart';
+import 'package:cantos_flutter/views/login_view.dart';
+import 'package:cantos_flutter/views/new_scheem_view.dart';
 import 'package:cantos_flutter/views/new_song_view.dart';
 import 'package:cantos_flutter/views/scheems_view.dart';
 import 'package:cantos_flutter/views/songs_view.dart';
@@ -51,10 +54,38 @@ class NavigationDrawerProvider extends ChangeNotifier {
                       );
                     },
                   );
+                } else if ('Cerrar Sesión' == value) {
+                  showAdaptiveDialog(
+                    context: Get.context!,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text('Cerrar sesión'),
+                        content: const Text('¿Estás seguro de cerrar sesión?'),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Get.back();
+                            },
+                            child: const Text('Cancelar', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Get.back();
+                              Get.to(
+                                () => const LoginView(),
+                                transition: Transition.rightToLeft,
+                              );
+                            },
+                            child: const Text('Aceptar', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                          ),
+                        ],
+                      );
+                    },
+                  );
                 }
               },
               itemBuilder: (BuildContext context) {
-                return ['Nuevo', 'Acerca de'].map((String choice) {
+                return ['Nuevo', 'Acerca de', 'Cerrar Sesión'].map((String choice) {
                   return PopupMenuItem<String>(
                     value: choice,
                     child: Text(choice),
@@ -70,6 +101,14 @@ class NavigationDrawerProvider extends ChangeNotifier {
         icon: const Icon(Icons.music_note),
         appBar: AppBar(
           title: const Text('Mis Cantos'),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.search),
+              onPressed: () {
+                search(Get.context!);
+              },
+            ),
+          ],
         ),
         view: const SongsView(),
       ),
@@ -77,6 +116,29 @@ class NavigationDrawerProvider extends ChangeNotifier {
         icon: const Icon(Icons.queue_music_rounded),
         appBar: AppBar(
           title: const Text('Esquemas'),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.search),
+              onPressed: () {
+                search(Get.context!);
+              },
+            ),
+          ],
+        ),
+        // Animación al aparecer
+        floatingActionButton: AnimatedOpacity(
+          opacity: 1.0,
+          duration: const Duration(seconds: 5),
+          child: FloatingActionButton(
+            backgroundColor: Constants.colorPrimaryLight,
+            onPressed: () {
+              Get.to(
+                () => const NewScheemView(newScheem: true),
+                transition: Transition.rightToLeft,
+              );
+            },
+            child: const Icon(Icons.add),
+          ),
         ),
         view: const ScheemsView(),
       ),
