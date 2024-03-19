@@ -1,5 +1,6 @@
 import 'package:cantos_flutter/providers/new_scheem_provider.dart';
 import 'package:cantos_flutter/utils/constans.dart';
+import 'package:cantos_flutter/widgets/my_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,7 +13,7 @@ class NewScheemView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(newScheem ? 'Nuevo esquema' : 'Modificar esquema'),
+        title: MyText(newScheem ? 'Nuevo esquema' : 'Modificar esquema'),
         actions: [
           Builder(
             builder: (context) {
@@ -36,12 +37,10 @@ class NewScheemView extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    const MyText(
                       'Nombre',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
                     ),
                     const SizedBox(height: 5),
                     const TextField(
@@ -59,12 +58,10 @@ class NewScheemView extends StatelessWidget {
                         minimumSize: const Size(double.infinity, 50),
                         backgroundColor: Constants.colorPrimaryLight,
                       ),
-                      child: const Text(
+                      child: const MyText(
                         'Agregar canto',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                        ),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                     const SizedBox(height: 15),
@@ -77,12 +74,10 @@ class NewScheemView extends StatelessWidget {
                           onTap: () {},
                           child: Container(
                             padding: const EdgeInsets.all(15),
-                            child: Text(
+                            child: MyText(
                               'Canto ${index + 1}',
-                              style: const TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500,
-                              ),
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                         );
@@ -106,12 +101,10 @@ class NewScheemView extends StatelessWidget {
                   minimumSize: const Size(double.infinity, 50),
                   backgroundColor: Constants.colorPrimaryLight,
                 ),
-                child: Text(
+                child: MyText(
                   newScheem ? 'Guardar esquema' : 'Modificar esquema',
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
-                  ),
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
             ),

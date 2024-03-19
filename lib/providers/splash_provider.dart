@@ -1,4 +1,4 @@
-import 'package:cantos_flutter/views/login_view.dart';
+import 'package:cantos_flutter/views/navigation_drawer_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,7 +15,7 @@ class SplashProvider extends ChangeNotifier {
       _isLoaded = false;
       notifyListeners();
       Get.offAll(
-        () => const LoginView(),
+        () => const NavigationDrawerView(),
         transition: Transition.fade,
         duration: const Duration(milliseconds: 1000),
       );

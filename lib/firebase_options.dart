@@ -67,6 +67,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '792319468494',
     projectId: 'cantos-1651f',
     storageBucket: 'cantos-1651f.appspot.com',
+    androidClientId: '792319468494-2mpp7464sjn90kpouji9ij01sc0d17et.apps.googleusercontent.com',
+    iosClientId: '792319468494-p4vnueevc8ifodcq9ngkbghg5psaql6e.apps.googleusercontent.com',
     iosBundleId: 'com.pacosotelo.cantosf',
   );
 
@@ -76,6 +78,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '792319468494',
     projectId: 'cantos-1651f',
     storageBucket: 'cantos-1651f.appspot.com',
+    androidClientId: '792319468494-2mpp7464sjn90kpouji9ij01sc0d17et.apps.googleusercontent.com',
+    iosClientId: '792319468494-l1s8g9il6pt1bug12v3q710kpkojijif.apps.googleusercontent.com',
     iosBundleId: 'com.pacosotelo.cantosf.RunnerTests',
   );
 }

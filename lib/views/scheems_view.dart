@@ -1,5 +1,6 @@
 import 'package:cantos_flutter/providers/scheems_provider.dart';
 import 'package:cantos_flutter/utils/constans.dart';
+import 'package:cantos_flutter/widgets/my_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -29,12 +30,10 @@ class ScheemsView extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    const Text(
+                    const MyText(
                       'Nombre',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
                     ),
                     const SizedBox(height: 10),
                     ListView.separated(
@@ -48,11 +47,9 @@ class ScheemsView extends StatelessWidget {
                           },
                           child: Container(
                             padding: const EdgeInsets.all(15),
-                            child: Text(
+                            child: MyText(
                               'Canto ${index + 1}',
-                              style: const TextStyle(
-                                fontSize: 14,
-                              ),
+                              fontSize: 14,
                             ),
                           ),
                         );

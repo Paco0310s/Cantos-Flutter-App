@@ -1,51 +1,64 @@
+import 'package:cantos_flutter/models/song_model.dart';
 import 'package:cantos_flutter/utils/constans.dart';
 import 'package:cantos_flutter/views/new_song_view.dart';
+import 'package:cantos_flutter/widgets/my_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:get/get.dart';
 
 class ViewSongView extends StatelessWidget {
-  const ViewSongView({super.key});
+  final SongModel song;
+
+  const ViewSongView({super.key, required this.song});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: Container(
         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            FloatingActionButton(
-              heroTag: 'left',
-              onPressed: () {},
-              backgroundColor: Constants.colorPrimaryLight,
-              child: const Icon(FeatherIcons.arrowLeft),
-            ),
-            FloatingActionButton(
-              heroTag: 'right',
-              onPressed: () {},
-              backgroundColor: Constants.colorPrimaryLight,
-              child: const Icon(FeatherIcons.arrowRight),
-            ),
-          ],
+        child: Visibility(
+          visible: false,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              FloatingActionButton(
+                heroTag: 'left',
+                onPressed: () {},
+                backgroundColor: Constants.colorPrimaryLight,
+                child: const Icon(FeatherIcons.arrowLeft),
+              ),
+              FloatingActionButton(
+                heroTag: 'right',
+                onPressed: () {},
+                backgroundColor: Constants.colorPrimaryLight,
+                child: const Icon(FeatherIcons.arrowRight),
+              ),
+            ],
+          ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       appBar: AppBar(
-        title: const Text('Nombre del canto'),
+        title: MyText(song.title),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.remove),
-            onPressed: () {},
+          Visibility(
+            visible: false,
+            child: IconButton(
+              icon: const Icon(Icons.remove),
+              onPressed: () {},
+            ),
           ),
-          IconButton(
-            icon: const Icon(Icons.add),
-            onPressed: () {},
+          Visibility(
+            visible: false,
+            child: IconButton(
+              icon: const Icon(Icons.add),
+              onPressed: () {},
+            ),
           ),
           PopupMenuButton<String>(onSelected: (value) {
             if (value == 'edit') {
               Get.to(
-                () => const NewSongView(newSong: false),
+                () => NewSongView(song: song),
                 transition: Transition.rightToLeft,
               );
             } else if (value == 'delete') {
@@ -53,20 +66,20 @@ class ViewSongView extends StatelessWidget {
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog.adaptive(
-                    title: const Text('Eliminar'),
-                    content: const Text('¿Estás seguro de eliminar este canto?'),
+                    title: const MyText('Eliminar'),
+                    content: const MyText('¿Estás seguro de eliminar este canto?'),
                     actions: [
                       TextButton(
                         onPressed: () {
                           Get.back();
                         },
-                        child: const Text('Cancelar', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                        child: const MyText('Cancelar', fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       TextButton(
                         onPressed: () {
                           Get.back();
                         },
-                        child: const Text('Eliminar', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                        child: const MyText('Eliminar', fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                     ],
                   );
@@ -83,23 +96,23 @@ class ViewSongView extends StatelessWidget {
             return [
               const PopupMenuItem(
                 value: 'edit',
-                child: Text('Modificar'),
+                child: MyText('Modificar'),
               ),
               const PopupMenuItem(
                 value: 'delete',
-                child: Text('Eliminar'),
+                child: MyText('Eliminar'),
               ),
               const PopupMenuItem(
                 value: 'up',
-                child: Text('Subir de tono'),
+                child: MyText('Subir de tono'),
               ),
               const PopupMenuItem(
                 value: 'down',
-                child: Text('Bajar de tono'),
+                child: MyText('Bajar de tono'),
               ),
               const PopupMenuItem(
                 value: 'pdf',
-                child: Text('Exportar en PDF'),
+                child: MyText('Exportar en PDF'),
               ),
             ];
           }),
@@ -107,15 +120,12 @@ class ViewSongView extends StatelessWidget {
       ),
       body: InteractiveViewer(
         boundaryMargin: const EdgeInsets.all(10),
-        minScale: 0.01,
+        minScale: 1,
         maxScale: 2,
-        child: const SizedBox(
+        child: SizedBox(
           width: double.infinity,
           height: double.infinity,
-          child: Text(
-            'lipsum lorem dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum lipsum lorem dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum lipsum lorem dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum',
-            style: TextStyle(fontSize: 12),
-          ),
+          child: MyText( song.lyrics, fontSize: 18),
         ),
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:cantos_flutter/widgets/my_text.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -30,13 +31,11 @@ class RegisterView extends StatelessWidget {
                       color: Color(0xFF393939),
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
-                    child: const Text(
+                    child: const MyText(
                       'Registrate',
-                      style: TextStyle(
-                        color: Colors.pinkAccent,
-                        fontSize: 25.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      color: Colors.pinkAccent,
+                      fontSize: 25.0,
+                      fontWeight: FontWeight.bold,
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -62,12 +61,10 @@ class RegisterView extends StatelessWidget {
                                   padding: const EdgeInsets.all(10),
                                   child: Column(
                                     children: [
-                                      const Text(
+                                      const MyText(
                                         'Selecciona una opción',
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                       const Gap(20),
                                       Row(
@@ -84,7 +81,7 @@ class RegisterView extends StatelessWidget {
                                                     color: Colors.white,
                                                   ),
                                                   Gap(10),
-                                                  Text('Camara'),
+                                                  MyText('Camara'),
                                                 ],
                                               ),
                                             ),
@@ -100,7 +97,7 @@ class RegisterView extends StatelessWidget {
                                                     color: Colors.white,
                                                   ),
                                                   Gap(10),
-                                                  Text('Galeria'),
+                                                  MyText('Galeria'),
                                                 ],
                                               ),
                                             ),
@@ -174,12 +171,10 @@ class RegisterView extends StatelessWidget {
                             children: [
                               Icon(Icons.check),
                               Gap(5),
-                              Text(
+                              MyText(
                                 'Listo',
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
                               ),
                             ],
                           ),
@@ -202,12 +197,10 @@ class RegisterView extends StatelessWidget {
                             children: [
                               Icon(Icons.arrow_back),
                               Gap(5),
-                              Text(
+                              MyText(
                                 'Volver',
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
                               ),
                             ],
                           ),

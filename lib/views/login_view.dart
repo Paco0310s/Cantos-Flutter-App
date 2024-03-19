@@ -1,5 +1,6 @@
 import 'package:cantos_flutter/providers/login_provider.dart';
 import 'package:cantos_flutter/utils/constans.dart';
+import 'package:cantos_flutter/widgets/my_text.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -35,13 +36,11 @@ class LoginView extends StatelessWidget {
                       color: Constants.colorPrimary,
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
-                    child: const Text(
+                    child: const MyText(
                       Constants.textForContinue,
-                      style: TextStyle(
-                        color: Constants.colorAccent,
-                        fontSize: 25.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      color: Constants.colorAccent,
+                      fontSize: 25.0,
+                      fontWeight: FontWeight.bold,
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -100,12 +99,10 @@ class LoginView extends StatelessWidget {
                               borderRadius: BorderRadius.circular(8.0),
                             ),
                           ),
-                          child: const Text(
+                          child: const MyText(
                             Constants.textLogin,
-                            style: TextStyle(
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                         const Gap(30),
@@ -128,23 +125,19 @@ class LoginView extends StatelessWidget {
                               onConfirm: () => loginProvider.sendEmailForRecoverPassword(),
                             );
                           },
-                          child: const Text(
+                          child: const MyText(
                             Constants.textForgotPassword,
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 12.0,
-                            ),
+                            fontSize: 12.0,
                           ),
                         ),
                         const Gap(20),
                         InkWell(
                           onTap: () => loginProvider.goToRegister(),
-                          child: const Text(
+                          child: const MyText(
                             Constants.textRegister,
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 12.0,
-                            ),
+                            fontSize: 12.0,
                           ),
                         ),
                         const Gap(30.0),
@@ -158,9 +151,8 @@ class LoginView extends StatelessWidget {
                             ),
                             Padding(
                               padding: EdgeInsets.symmetric(horizontal: 10.0),
-                              child: Text(
+                              child: MyText(
                                 Constants.textOrLoginWith,
-                                style: TextStyle(),
                               ),
                             ),
                             Expanded(
@@ -191,9 +183,11 @@ class LoginView extends StatelessWidget {
                                 height: 20,
                               ),
                               const Gap(10),
-                              const Text(
+                              const MyText(
                                 Constants.textLoginWithGoogle,
-                                style: TextStyle(color: Constants.colorTextSecondary, fontSize: 16.0, fontWeight: FontWeight.bold),
+                                color: Constants.colorTextSecondary, 
+                                fontSize: 16.0, 
+                                fontWeight: FontWeight.bold
                               ),
                             ],
                           ),

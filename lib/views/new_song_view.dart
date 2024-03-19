@@ -1,17 +1,24 @@
+import 'package:cantos_flutter/models/song_model.dart';
+import 'package:cantos_flutter/providers/new_song_provider.dart';
+import 'package:cantos_flutter/widgets/my_text.dart';
+import 'package:cantos_flutter/widgets/my_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 class NewSongView extends StatelessWidget {
-  final bool newSong;
+  final SongModel? song;
 
-  const NewSongView({Key? key, required this.newSong}) : super(key: key);
+  const NewSongView({Key? key, this.song}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final NewSongProvider newSongProvider = Provider.of<NewSongProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(newSong ? 'Nuevo canto' : 'Modificar canto'),
+        title: MyText(song == null ? 'Nuevo canto' : 'Modificar canto'),
         actions: [
           IconButton(
             icon: const Icon(Icons.format_quote, size: 32),
@@ -27,23 +34,20 @@ class NewSongView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Nombre', style: TextStyle(fontSize: 18)),
+                const MyText('Nombre', fontSize: 18),
                 const SizedBox(height: 5),
-                const TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Nombre del canto',
-                    border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
-                  ),
+                MyTextField(
+                  controller: newSongProvider.titleController..text = song?.title ?? '',
+                  text: 'Nombre del canto', 
+                  keyboardType: TextInputType.multiline,
                 ),
                 const SizedBox(height: 20),
-                const Text('Letra', style: TextStyle(fontSize: 18)),
+                const MyText('Letra', fontSize: 18),
                 const SizedBox(height: 5),
-                const TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Letra del canto',
-                    border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
-                  ),
-                  maxLines: 10,
+                MyTextField(
+                  controller: newSongProvider.lyricsController..text = song?.lyrics ?? '',
+                  text: 'Letra del canto',
+                  keyboardType: TextInputType.multiline,
                 ),
                 const SizedBox(height: 20),
                 Row(
@@ -55,7 +59,7 @@ class NewSongView extends StatelessWidget {
                             context: context,
                             builder: (BuildContext context) {
                               return AlertDialog.adaptive(
-                                title: const Text('Momentos:'),
+                                title: const MyText('Momentos:'),
                                 content: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
@@ -68,7 +72,7 @@ class NewSongView extends StatelessWidget {
                                             onChanged: (value) {},
                                           ),
                                           const Gap(5),
-                                          const Text('Momento'),
+                                          const MyText('Momento'),
                                         ],
                                       ),
                                   ],
@@ -78,13 +82,13 @@ class NewSongView extends StatelessWidget {
                                     onPressed: () {
                                       Get.back();
                                     },
-                                    child: const Text('Cancelar', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                                    child: const MyText('Cancelar', fontSize: 18, fontWeight: FontWeight.bold),
                                   ),
                                   TextButton(
                                     onPressed: () {
                                       Get.back();
                                     },
-                                    child: const Text('Aceptar', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                                    child: const MyText('Aceptar', fontSize: 18, fontWeight: FontWeight.bold),
                                   ),
                                 ],
                               );
@@ -99,12 +103,10 @@ class NewSongView extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                         ),
-                        child: const Text(
+                        child: const MyText(
                           'Momento',
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
@@ -116,7 +118,7 @@ class NewSongView extends StatelessWidget {
                             context: context,
                             builder: (BuildContext context) {
                               return AlertDialog.adaptive(
-                                title: const Text('Tiempos:'),
+                                title: const MyText('Tiempos:'),
                                 content: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
@@ -129,7 +131,7 @@ class NewSongView extends StatelessWidget {
                                             onChanged: (value) {},
                                           ),
                                           const Gap(5),
-                                          const Text('Tiempo'),
+                                          const MyText('Tiempo'),
                                         ],
                                       ),
                                   ],
@@ -139,13 +141,13 @@ class NewSongView extends StatelessWidget {
                                     onPressed: () {
                                       Get.back();
                                     },
-                                    child: const Text('Cancelar', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                                    child: const MyText('Cancelar', fontSize: 18, fontWeight: FontWeight.bold),
                                   ),
                                   TextButton(
                                     onPressed: () {
                                       Get.back();
                                     },
-                                    child: const Text('Aceptar', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                                    child: const MyText('Aceptar', fontSize: 18, fontWeight: FontWeight.bold),
                                   ),
                                 ],
                               );
@@ -160,12 +162,10 @@ class NewSongView extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                         ),
-                        child: const Text(
+                        child: const MyText(
                           'Tiempo',
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
@@ -173,7 +173,13 @@ class NewSongView extends StatelessWidget {
                 ),
                 const Gap(20),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if (song == null) {
+                      newSongProvider.addSong();
+                    } else {
+                      newSongProvider.updateExistingSong(song);
+                    }
+                  },
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(double.infinity, 50),
                     foregroundColor: Colors.white,
@@ -182,12 +188,10 @@ class NewSongView extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                   ),
-                  child: Text(
-                    newSong ? 'Guardar' : 'Modificar',
-                    style: const TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  child: MyText(
+                    song == null ? 'Guardar' : 'Modificar',
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ],

@@ -1,3 +1,4 @@
+import 'package:cantos_flutter/services/firebase_service.dart';
 import 'package:flutter/material.dart';
 
 class DataSearch extends SearchDelegate<String> {
@@ -29,7 +30,29 @@ class DataSearch extends SearchDelegate<String> {
   @override
   Widget buildResults(BuildContext context) {
     // Aquí puedes retornar los resultados de la búsqueda
-    return Container();
+    return FutureBuilder(
+      future: searchSongs(query),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.hasData) {
+          return ListView.builder(
+            itemCount: snapshot.data.length,
+            itemBuilder: (BuildContext context, int index) {
+              return ListTile(
+                title: Text(snapshot.data[index].title),
+                subtitle: Text(snapshot.data[index].lyrics),
+                onTap: () {
+                  close(context, snapshot.data[index].title);
+                },
+              );
+            },
+          );
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
+    );
   }
 
   @override

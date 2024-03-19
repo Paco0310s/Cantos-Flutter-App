@@ -6,6 +6,7 @@ import 'package:cantos_flutter/views/new_scheem_view.dart';
 import 'package:cantos_flutter/views/new_song_view.dart';
 import 'package:cantos_flutter/views/scheems_view.dart';
 import 'package:cantos_flutter/views/songs_view.dart';
+import 'package:cantos_flutter/widgets/my_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,7 +22,7 @@ class NavigationDrawerProvider extends ChangeNotifier {
       NavigationViewsModel(
         icon: const Icon(Icons.home),
         appBar: AppBar(
-          title: const Text('Cantos'),
+          title: const MyText('Cantos'),
           actions: [
             IconButton(
               icon: const Icon(Icons.search),
@@ -33,7 +34,7 @@ class NavigationDrawerProvider extends ChangeNotifier {
               onSelected: (value) {
                 if (value == 'Nuevo') {
                   Get.to(
-                    () => const NewSongView(newSong: true),
+                    () => const NewSongView(),
                     transition: Transition.rightToLeft,
                   );
                 } else if (value == 'Acerca de') {
@@ -41,14 +42,14 @@ class NavigationDrawerProvider extends ChangeNotifier {
                     context: Get.context!,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: const Text('Acerca de'),
-                        content: const Text('© Paco Sotelo 2024 para el mundo\n\nVersión 0.1.0'),
+                        title: const MyText('Acerca de'),
+                        content: const MyText('© Paco Sotelo 2024 para el mundo\n\nVersión 0.1.0'),
                         actions: [
                           TextButton(
                             onPressed: () {
                               Get.back();
                             },
-                            child: const Text('Aceptar', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                            child: const MyText('Aceptar', fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                         ],
                       );
@@ -59,14 +60,14 @@ class NavigationDrawerProvider extends ChangeNotifier {
                     context: Get.context!,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: const Text('Cerrar sesión'),
-                        content: const Text('¿Estás seguro de cerrar sesión?'),
+                        title: const MyText('Cerrar sesión'),
+                        content: const MyText('¿Estás seguro de cerrar sesión?'),
                         actions: [
                           TextButton(
                             onPressed: () {
                               Get.back();
                             },
-                            child: const Text('Cancelar', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                            child: const MyText('Cancelar', fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                           TextButton(
                             onPressed: () {
@@ -76,7 +77,7 @@ class NavigationDrawerProvider extends ChangeNotifier {
                                 transition: Transition.rightToLeft,
                               );
                             },
-                            child: const Text('Aceptar', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                            child: const MyText('Aceptar', fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                         ],
                       );
@@ -85,10 +86,10 @@ class NavigationDrawerProvider extends ChangeNotifier {
                 }
               },
               itemBuilder: (BuildContext context) {
-                return ['Nuevo', 'Acerca de', 'Cerrar Sesión'].map((String choice) {
+                return ['Nuevo', 'Acerca de'].map((String choice) {
                   return PopupMenuItem<String>(
                     value: choice,
-                    child: Text(choice),
+                    child: MyText(choice),
                   );
                 }).toList();
               },
@@ -100,7 +101,7 @@ class NavigationDrawerProvider extends ChangeNotifier {
       NavigationViewsModel(
         icon: const Icon(Icons.music_note),
         appBar: AppBar(
-          title: const Text('Mis Cantos'),
+          title: const MyText('Mis Cantos'),
           actions: [
             IconButton(
               icon: const Icon(Icons.search),
@@ -115,7 +116,7 @@ class NavigationDrawerProvider extends ChangeNotifier {
       NavigationViewsModel(
         icon: const Icon(Icons.queue_music_rounded),
         appBar: AppBar(
-          title: const Text('Esquemas'),
+          title: const MyText('Esquemas'),
           actions: [
             IconButton(
               icon: const Icon(Icons.search),
@@ -145,7 +146,7 @@ class NavigationDrawerProvider extends ChangeNotifier {
       // NavigationViewsModel(
       //   icon: const Icon(Icons.logout),
       //   appBar: AppBar(
-      //     title: const Text('Cerrar sesión'),
+      //     title: const MyText('Cerrar sesión'),
       //   ),
       // ),
     ];
