@@ -1,4 +1,4 @@
-import 'package:cantos_flutter/services/firebase_service.dart';
+import 'package:cantos_flutter/services/songs_service.dart';
 import 'package:flutter/material.dart';
 
 class DataSearch extends SearchDelegate<String> {
@@ -31,7 +31,7 @@ class DataSearch extends SearchDelegate<String> {
   Widget buildResults(BuildContext context) {
     // Aquí puedes retornar los resultados de la búsqueda
     return FutureBuilder(
-      future: searchSongs(query),
+      future: SongsService.searchSongs(query),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
           return ListView.builder(

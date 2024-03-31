@@ -2,6 +2,7 @@ import 'package:cantos_flutter/providers/new_scheem_provider.dart';
 import 'package:cantos_flutter/utils/constans.dart';
 import 'package:cantos_flutter/widgets/my_text.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
 class NewScheemView extends StatelessWidget {
@@ -42,14 +43,14 @@ class NewScheemView extends StatelessWidget {
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
-                    const SizedBox(height: 5),
+                    const Gap(5),
                     const TextField(
                       decoration: InputDecoration(
                         hintText: 'Nombre del esquema',
                         border: OutlineInputBorder(),
                       ),
                     ),
-                    const SizedBox(height: 15),
+                    const Gap(15),
                     ElevatedButton(
                       onPressed: () {
                         context.read<NewScheemProvider>().addSong();
@@ -64,7 +65,7 @@ class NewScheemView extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    const SizedBox(height: 15),
+                    const Gap(15),
                     ListView.separated(
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,

@@ -11,6 +11,8 @@ class MyTextField extends StatelessWidget{
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final String? Function(String?)? validator;
+  final int? maxLines;
+  final int? minLines;
 
   const MyTextField({
     super.key, 
@@ -23,6 +25,8 @@ class MyTextField extends StatelessWidget{
     this.prefixIcon,
     this.suffixIcon,
     this.validator,
+    this.maxLines,
+    this.minLines,
   });
 
   @override
@@ -44,6 +48,8 @@ class MyTextField extends StatelessWidget{
       keyboardType: keyboardType,
       obscureText: obscureText,
       onChanged: onChanged,
+      maxLines: maxLines ?? 1,
+      minLines: minLines,
     );
   }
 }

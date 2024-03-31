@@ -2,6 +2,7 @@ import 'package:cantos_flutter/providers/scheems_provider.dart';
 import 'package:cantos_flutter/utils/constans.dart';
 import 'package:cantos_flutter/widgets/my_text.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
 class ScheemsView extends StatelessWidget {
@@ -35,7 +36,7 @@ class ScheemsView extends StatelessWidget {
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
-                    const SizedBox(height: 10),
+                    const Gap(10),
                     ListView.separated(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
@@ -65,7 +66,7 @@ class ScheemsView extends StatelessWidget {
             );
           },
           separatorBuilder: (BuildContext context, int index) {
-            return const SizedBox(height: 10);
+            return const Gap(10);
           },
         ),
       ),

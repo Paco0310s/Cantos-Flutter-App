@@ -1,5 +1,6 @@
 import 'package:cantos_flutter/models/song_model.dart';
-import 'package:cantos_flutter/services/firebase_service.dart';
+import 'package:cantos_flutter/services/songs_service.dart';
+import 'package:cantos_flutter/utils/constans.dart';
 import 'package:cantos_flutter/views/view_song_view.dart';
 import 'package:cantos_flutter/widgets/my_loading.dart';
 import 'package:cantos_flutter/widgets/my_text.dart';
@@ -12,7 +13,7 @@ class SongsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: getSongs(),
+      future: SongsService.getSongs(),
       builder: (context, snapshot) {
          if (snapshot.connectionState == ConnectionState.waiting) {
           return const MyLoading();
@@ -38,22 +39,36 @@ class _SongsList extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       itemCount: songs.length,
       itemBuilder: (context, index) {
-        return Container(
-          margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
-          decoration: const BoxDecoration(
-            color: Colors.grey,
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-          ),
-          child: ListTile(
-            onTap: () {
-              Get.to(() => ViewSongView(song: songs[index]), transition: Transition.rightToLeft);
-            },
-            title: MyText(songs[index].title),
-            subtitle: MyText('${songs[index].artist}, ${songs[index].album}'),
-          ),
-        );
+        return _SongItem(song: songs[index]);
       },
     );
   }
   
+}
+
+class _SongItem extends StatelessWidget {
+  const _SongItem({
+    required this.song,
+  });
+
+  final SongModel song;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(top: 7, left: 7, right: 7),
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+        color: Constants.color3,
+        border: Border.fromBorderSide(BorderSide(color: Constants.color1, width: .5)),
+      ),
+      child: ListTile(
+        onTap: () {
+          Get.to(() => ViewSongView(song: song), transition: Transition.rightToLeft);
+        },
+        title: MyText(song.title),
+        subtitle: MyText('${song.moments.map((e) => e.moment)}, ${song.timeSongs.map((e) => e.time)}'),
+      ),
+    );
+  }
 }

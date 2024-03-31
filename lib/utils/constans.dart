@@ -30,14 +30,21 @@ class Constants {
   static const String cancel = 'Cancelar';
 
   // Colors
-  static const Color colorPrimary = Color(0xFF393939);
-  static const Color colorPrimaryDark = Color.fromARGB(255, 28, 28, 29);
+  static const Color color1 = Color(0xFF032940);
+  static const Color color2 = Color(0xFF2E7B8C);
+  static const Color color3 = Color.fromARGB(255, 246, 253, 255);
+  static const Color color4 = Color.fromARGB(255, 225, 235, 240);
+  static const Color color5 = Color(0xFFA65526);
+  static const Color error = Color(0xFFD32F2F);
+
+  static const Color colorPrimary = Color(0xFF032940);
+  static const Color colorPrimaryDark = Color(0xFF021826);
   static const Color colorPrimaryDark2 = Color(0xFF303030);
   static const Color colorPrimaryLight = Color.fromARGB(255, 128, 125, 125);
   static const Color colorPrimaryLight2 = Color(0xFFE0E0E0);
   static const Color colorDivider = Colors.grey;
-  static const Color colorAccent = Colors.pinkAccent;
-  static const Color colorTextPrimary = Color.fromARGB(255, 255, 255, 255);
+  static const Color colorAccent = Color(0xFFF2EFBD);
+  static const Color colorTextPrimary = Color.fromARGB(255, 246, 253, 255);
   static const Color colorTextSecondary = Color(0xFF000000);
   static const Color colorTextHint = Color(0xFF000000);
   static const Color colorBackground = Color(0xFFFFFFFF);

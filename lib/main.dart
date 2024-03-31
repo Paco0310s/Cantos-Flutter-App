@@ -10,6 +10,7 @@ import 'package:cantos_flutter/providers/songs_provider.dart';
 import 'package:cantos_flutter/providers/splash_provider.dart';
 import 'package:cantos_flutter/providers/user_provider.dart';
 import 'package:cantos_flutter/providers/view_song_provider.dart';
+import 'package:cantos_flutter/utils/constans.dart';
 import 'package:cantos_flutter/views/splash_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -47,11 +48,44 @@ class MainApp extends StatelessWidget {
       ],
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
+        title: Constants.appName,
         theme: ThemeData(
-          brightness: Brightness.dark,
-          primaryColor: Colors.grey[800],
-          hintColor: Colors.grey[600],
-          fontFamily: GoogleFonts.abel().fontFamily,
+          textTheme: GoogleFonts.abelTextTheme(),
+          useMaterial3: true,
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Constants.color1,
+            titleTextStyle: TextStyle(
+              color: Constants.color4,
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+            ),
+            foregroundColor: Constants.color4,
+          ),
+          // PopupMenuThemeData(
+          popupMenuTheme: const PopupMenuThemeData(
+            color: Constants.color1,
+            labelTextStyle: MaterialStatePropertyAll(
+              TextStyle(
+                color: Constants.color4,
+                fontSize: 12,
+                fontWeight: FontWeight.w300,
+              ),
+            )
+          ),
+          scaffoldBackgroundColor: Constants.color4,
+          colorScheme: const ColorScheme(
+            primary: Constants.color2,
+            secondary: Colors.green,
+            surface: Constants.color1,
+            background: Constants.color4,
+            error: Colors.purple,
+            onPrimary: Constants.color1,
+            onSecondary: Colors.grey,
+            onSurface: Colors.black,
+            onBackground: Colors.brown,
+            onError: Colors.orange,
+            brightness: Brightness.light,
+          )
         ),
         home: const SplashView(),
       ),

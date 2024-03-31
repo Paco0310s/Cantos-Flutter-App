@@ -1,5 +1,8 @@
 import 'package:cantos_flutter/models/song_model.dart';
 import 'package:cantos_flutter/providers/new_song_provider.dart';
+import 'package:cantos_flutter/services/moments_service.dart';
+import 'package:cantos_flutter/services/time_service.dart';
+import 'package:cantos_flutter/utils/constans.dart';
 import 'package:cantos_flutter/widgets/my_text.dart';
 import 'package:cantos_flutter/widgets/my_text_field.dart';
 import 'package:flutter/material.dart';
@@ -19,161 +22,247 @@ class NewSongView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: MyText(song == null ? 'Nuevo canto' : 'Modificar canto'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.format_quote, size: 32),
-            onPressed: () {},
-          ),
+        actions: const [
+          // IconButton(
+          //   icon: const Icon(Icons.format_quote, size: 32),
+          //   onPressed: () {},
+          // ),
         ],
       ),
       body: SafeArea(
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Container(
-            margin: const EdgeInsets.all(10),
+            margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const MyText('Nombre', fontSize: 18),
-                const SizedBox(height: 5),
                 MyTextField(
                   controller: newSongProvider.titleController..text = song?.title ?? '',
                   text: 'Nombre del canto', 
-                  keyboardType: TextInputType.multiline,
+                  keyboardType: TextInputType.text,
                 ),
-                const SizedBox(height: 20),
-                const MyText('Letra', fontSize: 18),
-                const SizedBox(height: 5),
+                const Gap(10),
                 MyTextField(
                   controller: newSongProvider.lyricsController..text = song?.lyrics ?? '',
                   text: 'Letra del canto',
                   keyboardType: TextInputType.multiline,
+                  minLines: 2,
+                  maxLines: 20,
                 ),
-                const SizedBox(height: 20),
+                // const Gap(20),
+                // Row(
+                //   children: [
+                //     Expanded(
+                //       child: ElevatedButton(
+                //         onPressed: () {
+                //           showMoments(context, newSongProvider);
+                //         },
+                //         style: ElevatedButton.styleFrom(
+                //           minimumSize: const Size(0, 50),
+                //           foregroundColor: Constants.color3,
+                //           backgroundColor: Constants.color2,
+                //           shape: RoundedRectangleBorder(
+                //             borderRadius: BorderRadius.circular(8.0),
+                //           ),
+                //         ),
+                //         child: const MyText(
+                //           'Momento',
+                //           fontSize: 16.0,
+                //           fontWeight: FontWeight.bold,
+                //         ),
+                //       ),
+                //     ),
+                //     const Gap(10),
+                //     Expanded(
+                //       child: ElevatedButton(
+                //         onPressed: () {
+                //           _showTimeSongs(context, newSongProvider);
+                //         },
+                //         style: ElevatedButton.styleFrom(
+                //           minimumSize: const Size(0, 50),
+                //           foregroundColor: Constants.color3,
+                //           backgroundColor: Constants.color2,
+                //           shape: RoundedRectangleBorder(
+                //             borderRadius: BorderRadius.circular(8.0),
+                //           ),
+                //         ),
+                //         child: const MyText(
+                //           'Tiempo',
+                //           fontSize: 16.0,
+                //           fontWeight: FontWeight.bold,
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                const Gap(7),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog.adaptive(
-                                title: const MyText('Momentos:'),
-                                content: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    for (int i = 0; i < 10; i++)
-                                      Row(
-                                        children: [
-                                          Checkbox(
-                                            value: true,
-                                            activeColor: const Color.fromARGB(255, 139, 139, 139),
-                                            onChanged: (value) {},
-                                          ),
-                                          const Gap(5),
-                                          const MyText('Momento'),
-                                        ],
-                                      ),
-                                  ],
-                                ),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      Get.back();
-                                    },
-                                    child: const MyText('Cancelar', fontSize: 18, fontWeight: FontWeight.bold),
-                                  ),
-                                  TextButton(
-                                    onPressed: () {
-                                      Get.back();
-                                    },
-                                    child: const MyText('Aceptar', fontSize: 18, fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: const Size(0, 50),
-                          foregroundColor: Colors.white,
-                          backgroundColor: const Color.fromARGB(255, 99, 97, 97),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                        ),
-                        child: const MyText(
-                          'Momento',
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    const Gap(20),
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog.adaptive(
-                                title: const MyText('Tiempos:'),
-                                content: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    for (int i = 0; i < 10; i++)
-                                      Row(
-                                        children: [
-                                          Checkbox(
-                                            value: true,
-                                            activeColor: const Color.fromARGB(255, 139, 139, 139),
-                                            onChanged: (value) {},
-                                          ),
-                                          const Gap(5),
-                                          const MyText('Tiempo'),
-                                        ],
-                                      ),
-                                  ],
-                                ),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      Get.back();
-                                    },
-                                    child: const MyText('Cancelar', fontSize: 18, fontWeight: FontWeight.bold),
-                                  ),
-                                  TextButton(
-                                    onPressed: () {
-                                      Get.back();
-                                    },
-                                    child: const MyText('Aceptar', fontSize: 18, fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: const Size(0, 50),
-                          foregroundColor: Colors.white,
-                          backgroundColor: const Color.fromARGB(255, 99, 97, 97),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                        ),
-                        child: const MyText(
-                          'Tiempo',
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold,
-                        ),
+                    const MyText('Momentos:', fontSize: 18, fontWeight: FontWeight.bold),
+                    IconButton(
+                      onPressed: () {
+                        showMoments(context, newSongProvider);
+                      },
+                      icon: const Row(
+                        children: [
+                          Icon(Icons.add, color: Constants.color2),
+                          Gap(5),
+                          MyText('Agregar ', fontSize: 16, fontWeight: FontWeight.bold),
+                        ],
                       ),
                     ),
                   ],
                 ),
-                const Gap(20),
+                Builder(builder: (context) {
+                  if (newSongProvider.moments.isNotEmpty) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Wrap(
+                          children: newSongProvider.moments.map((moment) {
+                            return Dismissible(
+                              direction: DismissDirection.up,
+                              key: UniqueKey(),
+                              onDismissed: (direction) {
+                                newSongProvider.removeMoment(moment);
+                              },
+                              background:  Container(
+                                margin: const EdgeInsets.only(right: 5, top: 5),
+                                padding: const EdgeInsets.all(6),
+                                decoration: BoxDecoration(
+                                  color: Constants.error,
+                                  borderRadius: BorderRadius.circular(5),
+                                  border: Border.all(color: Constants.color2),
+                                ),
+                                child: const Icon(Icons.delete_forever, color: Constants.color4),
+                              ),
+                              child: Container(
+                                margin: const EdgeInsets.only(right: 5, top: 5),
+                                padding: const EdgeInsets.all(6),
+                                decoration: BoxDecoration(
+                                  color: Constants.color3,
+                                  borderRadius: BorderRadius.circular(5),
+                                  border: Border.all(color: Constants.color2),
+                                ),
+                                child: MyText(moment.moment),
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ],
+                    );
+                  }
+                  return const Center(child: MyText('No hay momentos seleccionados', fontSize: 14, fontWeight: FontWeight.w400, color: Constants.error));
+                }),
+                const Gap(10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const MyText('Tiempos:', fontSize: 18, fontWeight: FontWeight.bold),
+                    IconButton(
+                      onPressed: () {
+                        _showTimeSongs(context, newSongProvider);
+                      },
+                      icon: const Row(
+                        children: [
+                          Icon(Icons.add, color: Constants.color2),
+                          Gap(5),
+                          MyText('Agregar ', fontSize: 16, fontWeight: FontWeight.bold),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                Builder(builder: (context) {
+                  if (newSongProvider.timeSongs.isNotEmpty) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Wrap(
+                          children: newSongProvider.timeSongs.map((time) {
+                            return Dismissible(
+                              direction: DismissDirection.up,
+                              key: UniqueKey(),
+                              onDismissed: (direction) {
+                                newSongProvider.removeTime(time);
+                              },
+                              background:  Container(
+                                margin: const EdgeInsets.only(right: 5, top: 5),
+                                padding: const EdgeInsets.all(6),
+                                decoration: BoxDecoration(
+                                  color: Constants.error,
+                                  borderRadius: BorderRadius.circular(5),
+                                  border: Border.all(color: Constants.color2),
+                                ),
+                                child: const Icon(Icons.delete_forever, color: Constants.color4),
+                              ),
+                              child: Container(
+                                margin: const EdgeInsets.only(right: 5, top: 5),
+                                padding: const EdgeInsets.all(6),
+                                decoration: BoxDecoration(
+                                  color: Constants.color3,
+                                  borderRadius: BorderRadius.circular(5),
+                                  border: Border.all(color: Constants.color2),
+                                ),
+                                child: MyText(time.time),
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ],
+                    );
+                  }
+                  return const Center(child: MyText('No hay tiempos seleccionados', fontSize: 14, fontWeight: FontWeight.w400, color: Constants.error));
+                }),
+                const Gap(30),
                 ElevatedButton(
                   onPressed: () {
+                    if (newSongProvider.titleController.text.isEmpty) {
+                      Get.snackbar(
+                        'Error',
+                        'El nombre del canto es requerido',
+                        backgroundColor: Constants.error,
+                        colorText: Constants.color4,
+                        icon: const Icon(Icons.error, color: Constants.color4),
+                      );
+                      return;
+                    }
+
+                    if (newSongProvider.lyricsController.text.isEmpty) {
+                      Get.snackbar(
+                        'Error',
+                        'La letra del canto es requerida',
+                        backgroundColor: Constants.error,
+                        colorText: Constants.color4,
+                        icon: const Icon(Icons.error, color: Constants.color4),
+                      );
+                      return;
+                    }
+
+                    if (newSongProvider.moments.isEmpty) {
+                      Get.snackbar(
+                        'Error',
+                        'Debes seleccionar al menos un momento',
+                        backgroundColor: Constants.error,
+                        colorText: Constants.color4,
+                        icon: const Icon(Icons.error, color: Constants.color4),
+                      );
+                      return;
+                    }
+
+                    if (newSongProvider.timeSongs.isEmpty) {
+                      Get.snackbar(
+                        'Error',
+                        'Debes seleccionar al menos un tiempo',
+                        backgroundColor: Constants.error,
+                        colorText: Constants.color4,
+                        icon: const Icon(Icons.error, color: Constants.color4),
+                      );
+                      return;
+                    }
+
                     if (song == null) {
                       newSongProvider.addSong();
                     } else {
@@ -183,7 +272,7 @@ class NewSongView extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(double.infinity, 50),
                     foregroundColor: Colors.white,
-                    backgroundColor: const Color.fromARGB(255, 99, 97, 97),
+                    backgroundColor: Constants.color1,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),
                     ),
@@ -199,6 +288,106 @@ class NewSongView extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Future<dynamic> showMoments(BuildContext context, NewSongProvider newSongProvider) {
+    return showAdaptiveDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog.adaptive(
+          title: const MyText('Momentos:', fontSize: 18, fontWeight: FontWeight.bold),
+          content: SizedBox( 
+            width: MediaQuery.of(context).size.width * .8,
+            child: FutureBuilder(
+              future: MomentsService.getMoments(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return const Center(child: CircularProgressIndicator());
+                } else {
+                  return ListView.builder(
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () => newSongProvider.changeActiveMoment(snapshot.data![index]),
+                        child: Row(
+                          children: [
+                            Checkbox(
+                              value: context.watch<NewSongProvider>().isMomentSelected(snapshot.data![index]),
+                              activeColor: Constants.color2,
+                              onChanged: (value) => newSongProvider.changeActiveMoment(snapshot.data![index]),
+                            ),
+                            const Gap(5),
+                            MyText(snapshot.data![index].moment),
+                          ],
+                        ),
+                      );
+                    },
+                  );
+                }
+              },
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Get.back();
+              },
+              child: const MyText('Aceptar', fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<dynamic> _showTimeSongs(BuildContext context, NewSongProvider newSongProvider) {
+    return showAdaptiveDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog.adaptive(
+          title: const MyText('Tiempos:', fontSize: 18, fontWeight: FontWeight.bold),
+          content: SizedBox( 
+            width: MediaQuery.of(context).size.width * .8,
+            child: FutureBuilder(
+              future: TimeService.getTimeSongs(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return const Center(child: CircularProgressIndicator());
+                } else {
+                  return ListView.builder(
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () => newSongProvider.changeActiveTime(snapshot.data![index]),
+                        child: Row(
+                          children: [
+                            Checkbox(
+                              value: context.watch<NewSongProvider>().isTimeSelected(snapshot.data![index]),
+                              activeColor: Constants.color2,
+                              onChanged: (value) => newSongProvider.changeActiveTime(snapshot.data![index]),
+                            ),
+                            const Gap(5),
+                            MyText(snapshot.data![index].time),
+                          ],
+                        ),
+                      );
+                    },
+                  );
+                }
+              },
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Get.back();
+              },
+              child: const MyText('Aceptar', fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ],
+        );
+      },
     );
   }
 }

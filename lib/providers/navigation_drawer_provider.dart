@@ -24,12 +24,12 @@ class NavigationDrawerProvider extends ChangeNotifier {
         appBar: AppBar(
           title: const MyText('Cantos'),
           actions: [
-            IconButton(
-              icon: const Icon(Icons.search),
-              onPressed: () {
-                search(Get.context!);
-              },
-            ),
+            // IconButton(
+            //   icon: const Icon(Icons.search),
+            //   onPressed: () {
+            //     search(Get.context!);
+            //   },
+            // ),
             PopupMenuButton<String>(
               onSelected: (value) {
                 if (value == 'Nuevo') {
@@ -42,8 +42,8 @@ class NavigationDrawerProvider extends ChangeNotifier {
                     context: Get.context!,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: const MyText('Acerca de'),
-                        content: const MyText('© Paco Sotelo 2024 para el mundo\n\nVersión 0.1.0'),
+                        title: const MyText('Acerca de', fontSize: 20, fontWeight: FontWeight.bold),
+                        content: const MyText('© Paco Sotelo 2024 para el mundo\nVersión 0.1.0'),
                         actions: [
                           TextButton(
                             onPressed: () {
