@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class NavigationDrawerView extends StatelessWidget {
-  const NavigationDrawerView({Key? key}) : super(key: key);
+  const NavigationDrawerView({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 class NewScheemView extends StatelessWidget {
   final bool newScheem;
 
-  const NewScheemView({Key? key, required this.newScheem}) : super(key: key);
+  const NewScheemView({super.key, required this.newScheem});
 
   @override
   Widget build(BuildContext context) {

@@ -20,7 +20,7 @@ import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 
 void main() async {
-  if (!Platform.isWindows && !Platform.isLinux) {
+  if (!Platform.isLinux) {
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   }
@@ -64,7 +64,7 @@ class MainApp extends StatelessWidget {
           // PopupMenuThemeData(
           popupMenuTheme: const PopupMenuThemeData(
             color: Constants.color1,
-            labelTextStyle: MaterialStatePropertyAll(
+            labelTextStyle: WidgetStatePropertyAll(
               TextStyle(
                 color: Constants.color4,
                 fontSize: 12,
@@ -77,12 +77,10 @@ class MainApp extends StatelessWidget {
             primary: Constants.color2,
             secondary: Colors.green,
             surface: Constants.color1,
-            background: Constants.color4,
             error: Colors.purple,
             onPrimary: Constants.color1,
             onSecondary: Colors.grey,
             onSurface: Colors.black,
-            onBackground: Colors.brown,
             onError: Colors.orange,
             brightness: Brightness.light,
           )

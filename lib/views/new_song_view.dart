@@ -13,7 +13,7 @@ import 'package:provider/provider.dart';
 class NewSongView extends StatelessWidget {
   final SongModel? song;
 
-  const NewSongView({Key? key, this.song}) : super(key: key);
+  const NewSongView({super.key, this.song});
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +22,12 @@ class NewSongView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: MyText(song == null ? 'Nuevo canto' : 'Modificar canto'),
-        actions: const [
-          // IconButton(
-          //   icon: const Icon(Icons.format_quote, size: 32),
-          //   onPressed: () {},
-          // ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.format_quote, size: 32),
+            tooltip: 'Poner/Quitar comillas',
+            onPressed: () {},
+          ),
         ],
       ),
       body: SafeArea(
@@ -38,64 +39,24 @@ class NewSongView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 MyTextField(
-                  controller: newSongProvider.titleController..text = song?.title ?? '',
-                  text: 'Nombre del canto', 
+                  controller: newSongProvider.titleController,
+                  text: 'Nombre del canto',
                   keyboardType: TextInputType.text,
                 ),
                 const Gap(10),
                 MyTextField(
-                  controller: newSongProvider.lyricsController..text = song?.lyrics ?? '',
+                  controller: newSongProvider.toneController,
+                  text: 'Tono del canto',
+                  keyboardType: TextInputType.text,
+                ),
+                const Gap(10),
+                MyTextField(
+                  controller: newSongProvider.lyricsController,
                   text: 'Letra del canto',
                   keyboardType: TextInputType.multiline,
                   minLines: 2,
                   maxLines: 20,
                 ),
-                // const Gap(20),
-                // Row(
-                //   children: [
-                //     Expanded(
-                //       child: ElevatedButton(
-                //         onPressed: () {
-                //           showMoments(context, newSongProvider);
-                //         },
-                //         style: ElevatedButton.styleFrom(
-                //           minimumSize: const Size(0, 50),
-                //           foregroundColor: Constants.color3,
-                //           backgroundColor: Constants.color2,
-                //           shape: RoundedRectangleBorder(
-                //             borderRadius: BorderRadius.circular(8.0),
-                //           ),
-                //         ),
-                //         child: const MyText(
-                //           'Momento',
-                //           fontSize: 16.0,
-                //           fontWeight: FontWeight.bold,
-                //         ),
-                //       ),
-                //     ),
-                //     const Gap(10),
-                //     Expanded(
-                //       child: ElevatedButton(
-                //         onPressed: () {
-                //           _showTimeSongs(context, newSongProvider);
-                //         },
-                //         style: ElevatedButton.styleFrom(
-                //           minimumSize: const Size(0, 50),
-                //           foregroundColor: Constants.color3,
-                //           backgroundColor: Constants.color2,
-                //           shape: RoundedRectangleBorder(
-                //             borderRadius: BorderRadius.circular(8.0),
-                //           ),
-                //         ),
-                //         child: const MyText(
-                //           'Tiempo',
-                //           fontSize: 16.0,
-                //           fontWeight: FontWeight.bold,
-                //         ),
-                //       ),
-                //     ),
-                //   ],
-                // ),
                 const Gap(7),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -128,7 +89,7 @@ class NewSongView extends StatelessWidget {
                               onDismissed: (direction) {
                                 newSongProvider.removeMoment(moment);
                               },
-                              background:  Container(
+                              background: Container(
                                 margin: const EdgeInsets.only(right: 5, top: 5),
                                 padding: const EdgeInsets.all(6),
                                 decoration: BoxDecoration(
@@ -188,7 +149,7 @@ class NewSongView extends StatelessWidget {
                               onDismissed: (direction) {
                                 newSongProvider.removeTime(time);
                               },
-                              background:  Container(
+                              background: Container(
                                 margin: const EdgeInsets.only(right: 5, top: 5),
                                 padding: const EdgeInsets.all(6),
                                 decoration: BoxDecoration(
@@ -219,50 +180,6 @@ class NewSongView extends StatelessWidget {
                 const Gap(30),
                 ElevatedButton(
                   onPressed: () {
-                    if (newSongProvider.titleController.text.isEmpty) {
-                      Get.snackbar(
-                        'Error',
-                        'El nombre del canto es requerido',
-                        backgroundColor: Constants.error,
-                        colorText: Constants.color4,
-                        icon: const Icon(Icons.error, color: Constants.color4),
-                      );
-                      return;
-                    }
-
-                    if (newSongProvider.lyricsController.text.isEmpty) {
-                      Get.snackbar(
-                        'Error',
-                        'La letra del canto es requerida',
-                        backgroundColor: Constants.error,
-                        colorText: Constants.color4,
-                        icon: const Icon(Icons.error, color: Constants.color4),
-                      );
-                      return;
-                    }
-
-                    if (newSongProvider.moments.isEmpty) {
-                      Get.snackbar(
-                        'Error',
-                        'Debes seleccionar al menos un momento',
-                        backgroundColor: Constants.error,
-                        colorText: Constants.color4,
-                        icon: const Icon(Icons.error, color: Constants.color4),
-                      );
-                      return;
-                    }
-
-                    if (newSongProvider.timeSongs.isEmpty) {
-                      Get.snackbar(
-                        'Error',
-                        'Debes seleccionar al menos un tiempo',
-                        backgroundColor: Constants.error,
-                        colorText: Constants.color4,
-                        icon: const Icon(Icons.error, color: Constants.color4),
-                      );
-                      return;
-                    }
-
                     if (song == null) {
                       newSongProvider.addSong();
                     } else {
@@ -297,7 +214,8 @@ class NewSongView extends StatelessWidget {
       builder: (BuildContext context) {
         return AlertDialog.adaptive(
           title: const MyText('Momentos:', fontSize: 18, fontWeight: FontWeight.bold),
-          content: SizedBox( 
+          backgroundColor: Constants.color4,
+          content: SizedBox(
             width: MediaQuery.of(context).size.width * .8,
             child: FutureBuilder(
               future: MomentsService.getMoments(),
@@ -347,7 +265,8 @@ class NewSongView extends StatelessWidget {
       builder: (BuildContext context) {
         return AlertDialog.adaptive(
           title: const MyText('Tiempos:', fontSize: 18, fontWeight: FontWeight.bold),
-          content: SizedBox( 
+          backgroundColor: Constants.color4,
+          content: SizedBox(
             width: MediaQuery.of(context).size.width * .8,
             child: FutureBuilder(
               future: TimeService.getTimeSongs(),

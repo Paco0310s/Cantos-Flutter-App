@@ -173,7 +173,7 @@ class ViewSongView extends StatelessWidget {
             width: double.infinity,
             height: double.infinity,
             child: Builder(builder: (context) {
-              final words = song.lyrics.split("'");
+              final words = song.variations.first.lyrics.split(' ');
               return RichText(text: TextSpan(
                 children: words.map((e) {
                   // Si es un acorde se pinta de otro color

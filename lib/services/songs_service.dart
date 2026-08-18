@@ -56,7 +56,7 @@ class SongsService {
 
   static getLastSongId() async {
     QuerySnapshot songsSnapshot = await songs.orderBy("id", descending: true).limit(1).get();
-    final lastSong = songsSnapshot.docs.first.data() as Map<String, dynamic>;
+    final lastSong = songsSnapshot.docs.isNotEmpty ? songsSnapshot.docs.first.data() as Map<String, dynamic> : {"id": 1};
     return lastSong["id"];
   }
 }

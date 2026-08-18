@@ -6,7 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
 class ScheemsView extends StatelessWidget {
-  const ScheemsView({Key? key}) : super(key: key);
+  const ScheemsView({super.key});
 
   @override
   Widget build(BuildContext context) {

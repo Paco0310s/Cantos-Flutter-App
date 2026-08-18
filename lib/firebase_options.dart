@@ -27,10 +27,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.macOS:
         return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -74,12 +71,23 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyATuYX029M4AOonT3Czx8FBYou6wDHcjAY',
-    appId: '1:792319468494:ios:e5efd450566a8029e1019f',
+    appId: '1:792319468494:ios:d2c072e8fe76c5d1e1019f',
     messagingSenderId: '792319468494',
     projectId: 'cantos-1651f',
     storageBucket: 'cantos-1651f.appspot.com',
     androidClientId: '792319468494-2mpp7464sjn90kpouji9ij01sc0d17et.apps.googleusercontent.com',
-    iosClientId: '792319468494-l1s8g9il6pt1bug12v3q710kpkojijif.apps.googleusercontent.com',
-    iosBundleId: 'com.pacosotelo.cantosf.RunnerTests',
+    iosClientId: '792319468494-p4vnueevc8ifodcq9ngkbghg5psaql6e.apps.googleusercontent.com',
+    iosBundleId: 'com.pacosotelo.cantosf',
   );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyDz0kGVYKUb65x89ZVt8LBddO7ExJ_a5b0',
+    appId: '1:792319468494:web:2bc2ae557af1d4c8e1019f',
+    messagingSenderId: '792319468494',
+    projectId: 'cantos-1651f',
+    authDomain: 'cantos-1651f.firebaseapp.com',
+    storageBucket: 'cantos-1651f.appspot.com',
+    measurementId: 'G-LF846LMZKP',
+  );
+
 }
